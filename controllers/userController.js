@@ -28,7 +28,17 @@ const registerUser=asyncHandler(async (req,res) => {
 
     console.log(user);
     if(user){
-        res.status(201).json({_id:user.id,email:user.email})
+        const accessToken= jwt.sign(
+            {
+            user:{
+                username:user.username,
+                email:user.email,
+                id:user.id
+            }
+        },process.env.ACCESS_TOKEN_SECRET
+        );
+        res.status(201).json({_id:user.id,email:user.email,accessToken})
+
     }else{
         res.status(400);
         throw new Error("User data not valid");
@@ -55,10 +65,10 @@ const loginUser=asyncHandler(async (req,res) => {
                 email:user.email,
                 id:user.id
             }
-        },process.env.ACCESS_TOKEN_SECRET,
-        {expiresIn:"15m"}
+        },process.env.ACCESS_TOKEN_SECRET
         );
-        res.status(200).json({accessToken});
+        res.status(200).json({_id:user.id,email:user.email,accessToken})
+
 
     }else{
         res.status(401);
