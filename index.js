@@ -15,6 +15,7 @@ connectDb();
 app.use(express.json());
 
 app.use('/api/users', require("./routes/userRoutes")); 
+app.use('/question',require("./routes/questionRoutes"));
 app.use(errorHandler);
 
 app.listen(port,() =>{
