@@ -1,15 +1,15 @@
-const SRTF = require('../models/SRTFModel'); // Import your SRTF model
+const MRU = require('../models/MRUModel'); // Import your MRU model
 
 
 
 //@desc GET /
 // Controller function to handle the GET request
-const getSRTFQuestionById = async (req, res) => {
+const getMRUQuestionById = async (req, res) => {
   try {
     const questionId = req.params.id; // Get the 'id' parameter from the request URL
 
     // Use the findOne method to find a document with 'question_no' equal to 'id'
-    const question = await SRTF.findOne({ question_no: questionId });
+    const question = await MRU.findOne({ question_no: questionId });
 
     if (!question) {
       // If no matching document is found, return a 404 Not Found response
@@ -26,12 +26,12 @@ const getSRTFQuestionById = async (req, res) => {
 };
 
 
-const deleteSRTFQuestionById = async (req, res) => {
+const deleteMRUQuestionById = async (req, res) => {
   try {
     const questionId = req.params.id; // Get the 'id' parameter from the request URL
 
     // Use the findOne method to find a document with 'question_no' equal to 'id'
-    const question = await SRTF.findOneAndDelete({ question_no: questionId });
+    const question = await MRU.findOneAndDelete({ question_no: questionId });
 
     if (!question) {
       // If no matching document is found, return a 404 Not Found response
@@ -49,14 +49,16 @@ const deleteSRTFQuestionById = async (req, res) => {
 
 
 
-const createSRTFQuestion = async (req, res) => {
+
+
+const createMRUQuestion = async (req, res) => {
     try {
-      const { question_no, SRTFProcesses } = req.body; // Get data from the request body
+      const { question_no, MRUProcesses } = req.body; // Get data from the request body
   
-      // Use the .create method to create and save the SRTF question
-      const createdQuestion = await SRTF.create({
+      // Use the .create method to create and save the MRU question
+      const createdQuestion = await MRU.create({
         question_no,
-        SRTFProcesses,
+        MRUProcesses,
       });
   
       // Return the created question as a JSON response with a status code of 201 (Created)
@@ -68,4 +70,4 @@ const createSRTFQuestion = async (req, res) => {
     }
   };
 
-  module.exports = { getSRTFQuestionById, createSRTFQuestion, deleteSRTFQuestionById };
+module.exports = { getMRUQuestionById ,createMRUQuestion,deleteMRUQuestionById};

@@ -1,19 +1,24 @@
-const express = require('express');
+
+const express=require('express');
 const router = express.Router();
 const { getFCFSQuestionById, createFCFSQuestion, deleteFCFSQuestionById } = require('../controllers/FCFSController');
 const validateToken = require('../middleware/validateTokenHandler');
-const { createSRTFQuestion, getSRTFQuestionById } = require('../controllers/SRTFController');
+const { createSRTFQuestion, getSRTFQuestionById ,deleteSRTFQuestionById} = require('../controllers/SRTFController');
 
-const { createSJFQuestion, getSJFQuestionById } = require('../controllers/SJFController');
+const { createSJFQuestion, getSJFQuestionById,deleteSJFQuestionById } = require('../controllers/SJFController');
 
-const { createPRQuestion, getPRQuestionById } = require('../controllers/PRController');
+const { createPRQuestion, getPRQuestionById ,deletePRQuestionById} = require('../controllers/PRController');
 
-const { createPrePRQuestion, getPrePRQuestionById } = require('../controllers/PrePRController');
+const { createPrePRQuestion, getPrePRQuestionById ,deletePrePRQuestionById} = require('../controllers/PrePRController');
 
 
-const { createPageReplacementQuestion, getPageReplacementQuestionById } = require('../controllers/PageReplacementController');
+const { createFIFOQuestion, getFIFOQuestionById,deleteFIFOQuestionById } = require('../controllers/FIFOController');
 
-const { createDiskManagementQuestion, getDiskManagementQuestionById } = require('../controllers/DiskManagementController');
+const { createLRUQuestion, getLRUQuestionById,deleteLRUQuestionById } = require('../controllers/LRUController');
+
+const { createMRUQuestion, getMRUQuestionById,deleteMRUQuestionById } = require('../controllers/MRUController');
+
+const { createDiskManagementQuestion, getDiskManagementQuestionById,deleteDiskManagementQuestionById } = require('../controllers/DiskManagementController');
 
 
 // Define the GET route for fetching a question by ID
@@ -29,31 +34,49 @@ router.get('/SRTF/:id',validateToken, getSRTFQuestionById);
 //POST request to create FCFS Question
 router.post('/SRTF',validateToken,createSRTFQuestion);
 
+router.delete('/SRTF/:id',validateToken,deleteSRTFQuestionById);
+
+
 router.get('/SJF/:id',validateToken, getSJFQuestionById);
 //POST request to create FCFS Question
 router.post('/SJF',validateToken,createSJFQuestion);
+router.delete('/SJF/:id',validateToken,deleteSJFQuestionById);
 
 
 router.get('/PR/:id',validateToken, getPRQuestionById);
 //POST request to create FCFS Question
 router.post('/PR',validateToken,createPRQuestion);
+router.delete('/PR/:id',validateToken,deletePRQuestionById);
 
 
 router.get('/PrePR/:id',validateToken, getPrePRQuestionById);
 //POST request to create FCFS Question
-router.post('/SJF',validateToken,createPrePRQuestion);
+router.post('/PrePr',validateToken,createPrePRQuestion);
+router.delete('/PrePr/:id',validateToken,deletePrePRQuestionById);
 
 
 
 router.get('/DiskManagement/:id',validateToken, getDiskManagementQuestionById);
 //POST request to create FCFS Question
 router.post('/DiskManagement',validateToken,createDiskManagementQuestion);
+router.delete('/DiskManagement/:id',validateToken,deleteDiskManagementQuestionById);
 
 
-router.get('/PageReplacement/:id',validateToken, getPageReplacementQuestionById);
+router.get('/FIFO/:id',validateToken, getFIFOQuestionById);
 //POST request to create FCFS Question
-router.post('/PageReplacement',validateToken,createPageReplacementQuestion);
+router.post('/FIFO',validateToken,createFIFOQuestion);
+router.delete('/FIFO/:id',validateToken,deleteFIFOQuestionById);
 
+router.get('/LRU/:id',validateToken, getLRUQuestionById);
+//POST request to create FCFS Question
+router.post('/LRU',validateToken,createLRUQuestion);
+router.delete('/LRU/:id',validateToken,deleteLRUQuestionById);
+
+
+router.get('/MRU/:id',validateToken, getMRUQuestionById);
+//POST request to create FCFS Question
+router.post('/MRU',validateToken,createMRUQuestion);
+router.delete('/MRU/:id',validateToken,deleteMRUQuestionById);
 
 
 
